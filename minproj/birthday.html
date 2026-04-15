@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Shafrin</title>
+
+<style>
+body{
+  margin:0;
+  font-family:Segoe UI;
+  background:linear-gradient(135deg,#ff9a9e,#fad0c4);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+  overflow:hidden;
+}
+
+/* Welcome Screen */
+#welcome{
+  text-align:center;
+  animation:fadeIn 2s ease;
+}
+
+@keyframes fadeIn{
+  from{opacity:0;}
+  to{opacity:1;}
+}
+
+button{
+  padding:12px 25px;
+  font-size:16px;
+  border:none;
+  border-radius:25px;
+  background:#ff4d6d;
+  color:white;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+button:hover{
+  background:#ff1e4d;
+  transform:scale(1.05);
+}
+
+/* Card */
+.card{
+  display:none;
+  background:white;
+  padding:25px;
+  border-radius:20px;
+  width:90%;
+  max-width:420px;
+  text-align:center;
+  box-shadow:0 15px 35px rgba(0,0,0,0.2);
+  animation:fadeIn 2s ease;
+}
+
+h1{
+  color:#ff4d6d;
+}
+
+#photo{
+  width:220px;
+  height:220px;
+  border-radius:20px;
+  object-fit:cover;
+  margin-top:15px;
+  border:4px solid #ff4d6d;
+  box-shadow:0 0 20px rgba(255,77,109,0.6);
+}
+
+/* Floating Hearts */
+.heart{
+  position:absolute;
+  bottom:-50px;
+  font-size:20px;
+  animation:floatUp 6s linear infinite;
+  opacity:0.7;
+}
+
+@keyframes floatUp{
+  from{transform:translateY(0);}
+  to{transform:translateY(-110vh);}
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- Music -->
+<audio id="music" loop>
+  <source src="music1.mp3" type="audio/mpeg">
+</audio>
+
+<!-- Welcome Screen -->
+<div id="welcome">
+  <h1>🎁 A Special Surprise 🎁</h1>
+  <button onclick="start()">Click To Open 💖</button>
+</div>
+
+<!-- Birthday Card -->
+<div class="card" id="card">
+  <h1>🎂 Happy Birthday Shafrin 🎉</h1>
+
+  <p id="message"></p>
+
+ <!-- Three Photos -->
+<div class="photo-gallery">
+  <img src="photo1.jpg">
+  <img src="photo2.jpg">
+  <img src="photo3.jpg">
+</div>
+
+  <br><br>
+  <button onclick="changeSong()">Change Song 🎵</button>
+
+  <h3>💖 With Love, Keerthi 💖</h3>
+</div>
+
+<!-- Floating Hearts -->
+<div class="heart" style="left:10%">💖</div>
+<div class="heart" style="left:40%">💕</div>
+<div class="heart" style="left:70%">💗</div>
+
+<!-- Confetti -->
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+<script>
+
+/* Start Surprise */
+function start(){
+  document.getElementById("welcome").style.display="none";
+  document.getElementById("card").style.display="block";
+
+  document.getElementById("music").play();
+
+  confetti({
+    particleCount:200,
+    spread:120,
+    origin:{y:0.6}
+  });
+
+  typeWriter();
+}
+
+/* Typing Effect */
+var text="You are one of the most special people in my life 💕 May your life be filled with happiness, love and beautiful memories ✨ Every moment with you feels magical 💫";
+var i=0;
+
+function typeWriter(){
+  if(i < text.length){
+    document.getElementById("message").innerHTML += text.charAt(i);
+    i++;
+    setTimeout(typeWriter,40);
+  }
+}
+
+/* Slideshow */
+var images=["photo1.jpg","photo2.jpg","photo3.jpg"];
+var index=0;
+
+setInterval(function(){
+  index++;
+  if(index>=images.length){
+    index=0;
+  }
+  document.getElementById("photo").src=images[index];
+},2500);
+
+/* Song Switch */
+var songs=["music.mp3","music2.mp3"];
+var songIndex=0;
+
+function changeSong(){
+  songIndex++;
+  if(songIndex>=songs.length){
+    songIndex=0;
+  }
+  var music=document.getElementById("music");
+  music.src=songs[songIndex];
+  music.play();
+}
+
+</script>
+
+</body>
+</html>
